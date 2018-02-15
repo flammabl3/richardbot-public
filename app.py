@@ -112,6 +112,7 @@ Command prefix, |, type | before commands
 |invite, gives you a bot invite.  
 |censor, censors what you said.
 |joined_at, prints when you joined.
+|attack, attacks a user.
 This bot was created by Flammable.
 
 
@@ -228,6 +229,24 @@ async def censor(ctx, *args):
     i = '█' * len(i)
     b.append(i)
   await client.say(''.join(b))
+
+@client.command(pass_context=True)
+async def attack(ctx, *attacked):
+  attacked_user = ' '.join(attacked)
+  organs = ['big toe', 'toenail', 'pinky toe', 'toe', 'ankle', 'calf', 'knee', 'kneecap', 'thigh',
+            'radial artery', 'thigh', 'femur', 'tibia', 'penis', 'testicles', 'scrotum', 'vagina', 'ovaries',
+            'intestines', 'spleen', 'stomach', 'liver', 'kidneys', 'ribs', 'ribcage', 'heart', 'lungs', 'spine', 'tailbone',
+            'spinal cord', 'back', 'chest', 'shoulder blade', 'arm', 'wrist', 'pinky', 'thumb', 'finger',
+            'shoulder', 'throat', 'trachea', 'esophagus', 'eyeballs', 'nose', 'septum', 'frenulum', 'vulva', 'ears', 'earlobe',
+            'hair', 'hairline', 'jaw', 'jugular vein', 'chin', 'posterior', 'anus', 'eyebrow', 'lips', 'teeth', 'tooth', 'tongue',
+            'temple', 'brain', 'breasts', 'nipple', 'breast']
+  attack_method = ['ripped off', 'severed', 'impaled', 'smashed', 'stomped', 'blugeoned', 'destroyed', 'shredded',
+                    'hacked off', 'inverted', 'cracked', 'shattered', 'grazed', 'brushed', 'scraped', 'stabbed', 'snapped',
+                    'detached', 'loosened', 'knocked out', 'bruised', 'bloodied', 'tore out', 'bit', 'kicked', 'whacked', 'curbstomped',
+                    'jumped on', 'smacked']
+
+  for i in range(1, randint(2, 6)):
+    await client.say("%s has %s %s's %s." % (ctx.message.author.display_name, random.choice(attack_method), attacked_user, random.choice(organs)))
 
 #add a dang prismatology thing
 
