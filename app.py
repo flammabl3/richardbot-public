@@ -1,3 +1,8 @@
+#yes my code sucks 
+#yes I forgot why added around a third of all the variables
+#chill
+#I only added comments now because I'm lazy and no one will see this code
+
 ############
 #imports
 ############
@@ -22,27 +27,27 @@ prismatology = {}
 
 from discord import Channel
 
-#void imports
-  
+
+#ignore this I think  
 num = None
 #to do:
 #   maybe:
-#       image fetcher
-#       swear checker
+#       image fetcher (imgur api? it's a hassle though)
 #       weather
-#       join leave
+#       join leave messages
 
 
-#command prefix
-
+#command prefix for commands
+#the client
 Client = discord.Client
 bot_prefix = "|"
 client = commands.Bot(command_prefix=bot_prefix)
+#the server (duh)
 serv = discord.client.Server
 channel = discord.utils.get(client.get_all_channels(), name = "general")
 #tells you that the bot is running
 
-
+#boots it up and tells you a bunch of stuff
 @client.event
 async def on_ready():
   print("Initialized.")
@@ -60,11 +65,12 @@ async def on_ready():
 
 @client.command(pass_context=True)
 async def roll(ctx, num):
-  a = int(num) - int(num) + 1
+  a = int(num) - int(num) + 1 #a = none - none + 1, so a = 1? 
+                              #what was I doing here don't touch it it might break
   await client.say("Roll from 1 to {}:".format(num))
   await client.say(randint(a, int(num)))
 
-#tries to replaces your bs with b emojis
+#tells you when you joined but I have no clue what the None bit is about disregard
 @client.command(pass_context=True)
 async def joined_at(ctx, member: discord.Member = None):
   if member is None:
@@ -73,15 +79,15 @@ async def joined_at(ctx, member: discord.Member = None):
   await client.say('{0} joined at {0.joined_at}'.format(member))
 
 
-
+#does quick maths
 @client.command(pass_context=True)
-async def calculator(ctx, a, b, c):
-  o = "{} {} {} is {}"
+async def calculator(ctx, a, b, c): #a is the first number, b is the operator, c is the second
+  o = "{} {} {} is {}"              #number, d is the answer
   if b == '+':
     d = int(a) + int(c)
     o = o.format(a, b, c, d)
     await client.say(o)
-
+#add subtract multiply divide
   elif b == '-':
     d = int(a) - int(c)
     o = o.format(a, b, c, d)
@@ -135,7 +141,7 @@ async def flip(ctx):
   elif coinflip == 1:
     await client.say('Tails!')
     await client.send_file(a, 'asset/tails.png')
-
+#eightball, self explanatory
 @client.command(pass_context=True)
 async def eightball(ctx):
   answers = [
@@ -161,6 +167,7 @@ async def eightball(ctx):
     'Very doubtful'
   ]
   await client.say(random.choice(answers))
+#says what you said to it, functions that take *args assemble the phrase with join()
 @client.command(pass_context=True)
 async def say(ctx, *phrase):
   full_phrase = []
@@ -168,16 +175,18 @@ async def say(ctx, *phrase):
     full_phrase.append(i)
   final = ' '.join(full_phrase)
   await client.say(final)
-
+#looks stuff up on youtube and gives you the first result
 @client.command(pass_context=True)
 async def ytsearch(ctx, *query):
   query_list = []
   for i in query:
-    query_list.append(i)
+    query_list.append(i) #same deal as with the say command
     
-  
+  #added this so it doesn't add a '+' symbol to 1 unseperated query, useless because
+  #a + at the end is automatically truncated and it doesn't affect it anyways
   if len(query_list) == 1:
-    url = "https://www.youtube.com/results?search_query={}".format(query)
+    url = "https://www.youtube.com/results?search_query={}".format(query) #uses requests
+    #headers so youtube doesn't deny access because it's a bot
     hdr = {
       'User-Agent': 'Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko)     Chrome/37.0.2049.0 Safari/537.36',
     }
@@ -197,7 +206,7 @@ async def ytsearch(ctx, *query):
       
 
   await client.say('https://www.youtube.com/watch?v=' + search_results[1])
-
+#regional indicator command, didn't work though
 '''
 @client.command(pass_context=True)
 async def indicator(ctx, *args):
@@ -222,6 +231,7 @@ async def indicator(ctx, *args):
       b.append(i)
     await client.say(''.join(b))
 '''
+#spits out what you said but with the '█' character replacing everything
 @client.command(pass_context=True)
 async def censor(ctx, *args):
   b = []
@@ -229,10 +239,11 @@ async def censor(ctx, *args):
     i = '█' * len(i)
     b.append(i)
   await client.say(''.join(b))
-
+#a command for having randomised and absurd physical combat
 @client.command(pass_context=True)
 async def attack(ctx, *attacked):
   attacked_user = ' '.join(attacked)
+  #organs that can be attacked and the ways you can attack them
   organs = ['big toe', 'toenail', 'pinky toe', 'toe', 'ankle', 'calf', 'knee', 'kneecap', 'thigh',
             'radial artery', 'thigh', 'femur', 'tibia', 'penis', 'testicles', 'scrotum', 'vagina', 'ovaries',
             'intestines', 'spleen', 'stomach', 'liver', 'kidneys', 'ribs', 'ribcage', 'heart', 'lungs', 'spine', 'tailbone',
@@ -243,17 +254,20 @@ async def attack(ctx, *attacked):
   attack_method = ['ripped off', 'severed', 'impaled', 'smashed', 'stomped', 'blugeoned', 'destroyed', 'shredded',
                     'hacked off', 'inverted', 'cracked', 'shattered', 'grazed', 'brushed', 'scraped', 'stabbed', 'snapped',
                     'detached', 'loosened', 'knocked out', 'bruised', 'bloodied', 'tore out', 'bit', 'kicked', 'whacked', 'curbstomped',
-                    'jumped on', 'smacked']
+                    'jumped on', 'smacked', 'twisted', 'exploded', 'fractured', 'tore', 'twisted', 'dislocated', 'punctured', 'perforated',
+                    'flattened', 'squashed']
 
   for i in range(1, randint(2, 6)):
+    #amount of attacks is random
     await client.say("%s has %s %s's %s." % (ctx.message.author.display_name, random.choice(attack_method), attacked_user, random.choice(organs)))
 
 #add a dang prismatology thing
 
-
+#redacted the invite link
 @client.command(pass_context=True)
 async def invite(ctx):
   await client.say("")
 #figure out how to use to incorporate id for stuff
 
 client.run("")
+#nice try
